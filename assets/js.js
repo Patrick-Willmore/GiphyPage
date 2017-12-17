@@ -1,4 +1,4 @@
-var topics =  ["plants", "cities", "people", "clouds", "boats", "faces", "ocean"];
+var topics =  ["plants", "cities", "stars", "clouds", "boats", "faces", "ocean"];
 
 //api key = HBsx5MFBfKeBhf3OIRkGr2Gpixr5JjbI
 
