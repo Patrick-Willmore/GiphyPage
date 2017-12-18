@@ -37,6 +37,7 @@ $("button").click(function(event) {
     search = topics[recentClick];
     queryUrl = "https://api.giphy.com/v1/gifs/search?q=timelapse-" + search + "&api_key=" + apiKey + "&limit=10";
     resultArray =[];
+    var submitClicked = false;
     $.ajax({
         url: queryUrl,
         method: 'GET',
@@ -48,9 +49,25 @@ $("button").click(function(event) {
         for (var j = 0; j < resultArray[0].length; j++) { 
             // $("#Gifs").html(`<img src="${resultArray[0][j].bitly_gif_url}">${j}</img>`);
             var myString = `<div class = 'stuff'><img src="${resultArray[0][j].images.downsized.url}"> <figcaption>Rating:${resultArray[0][j].rating.toUpperCase()}</figcaption></img></div>`;
+          
+
             $("#Gifs").append(myString);
             // buttons.appendTo('#Gifs'); 
         } 
+        $("#addButton").submit(function(event){
+            event.preventDefault();
+            console.log("clicked");
+            var userInput = $("form input:text").val();
+            topics.push(userInput);
+            var buttons = $(`<button id ="${topics.length-1}" value="${topics.length-1}">${topics[topics.length-1]}</button>`);
+            buttons.appendTo('#timelapseButtons'); 
+            recentClick = ($(this).val());
+            search = topics[recentClick];
+
+        });
+        // if (submitClicked === true) {
+        //     console.log("clicked");
+        // }
      
     }).fail(function(err) {
         throw err;
