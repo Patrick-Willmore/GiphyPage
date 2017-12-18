@@ -31,13 +31,14 @@ for (var i = 0; i < topics.length; i++) {
     buttons.appendTo('#timelapseButtons'); 
 } 
 
-$("button").click(function(event) {
+function myClick(event) {
     $("#Gifs").empty();
     recentClick = ($(this).val());
     search = topics[recentClick];
     queryUrl = "https://api.giphy.com/v1/gifs/search?q=timelapse-" + search + "&api_key=" + apiKey + "&limit=10";
     resultArray =[];
     var submitClicked = false;
+
     $.ajax({
         url: queryUrl,
         method: 'GET',
@@ -53,7 +54,12 @@ $("button").click(function(event) {
 
             $("#Gifs").append(myString);
             // buttons.appendTo('#Gifs'); 
-        } 
+        
+        }
+    });
+};
+
+        $("button").click(myClick); 
         $("#addButton").submit(function(event){
             event.preventDefault();
             console.log("clicked");
@@ -61,21 +67,17 @@ $("button").click(function(event) {
             topics.push(userInput);
             var buttons = $(`<button id ="${topics.length-1}" value="${topics.length-1}">${topics[topics.length-1]}</button>`);
             buttons.appendTo('#timelapseButtons'); 
-            recentClick = ($(this).val());
-            search = topics[recentClick];
+            buttons.click(myClick);
+
 
         });
         // if (submitClicked === true) {
         //     console.log("clicked");
         // }
-     
-    }).fail(function(err) {
-        throw err;
-    });
+
 // for (var i = 0; i < topics.length; i++) { 
 //     $("Gifs").html(`<img src="${resultArray[0][i].bitly_gif_url}">`);
 //     // buttons.appendTo('#Gifs'); 
 // } 
 
 
-});
