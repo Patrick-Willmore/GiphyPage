@@ -61,6 +61,7 @@ function myClick(event) {
 
         $("button").click(myClick); 
         $("#addButton").submit(function(event){
+            $('html, body').animate({ scrollTop: 0 }, 'fast');
             event.preventDefault();
             console.log("clicked");
             var userInput = $("form input:text").val();
@@ -68,6 +69,8 @@ function myClick(event) {
             var buttons = $(`<button id ="${topics.length-1}" value="${topics.length-1}">${topics[topics.length-1]}</button>`);
             buttons.appendTo('#timelapseButtons'); 
             buttons.click(myClick);
+            $("#timelapse-input").val("");
+           
 
 
         });
